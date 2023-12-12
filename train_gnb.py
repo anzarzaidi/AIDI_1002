@@ -7,10 +7,10 @@ import numpy as np
 import pandas as pd
 
 # load data hasil ekstraksi fitur fft
-x = pd.read_csv("feature_VBL-VA001.csv", header=None)
+x = pd.read_csv("data/feature_VBL-VA001.csv", header=None)
 
 # load label
-y = pd.read_csv("label_VBL-VA001.csv", header=None)
+y = pd.read_csv("data/label_VBL-VA001.csv", header=None)
 
 # make 1D array to avoid warning
 y = pd.Series.ravel(y)
@@ -40,6 +40,7 @@ for i, k in enumerate(var_gnb):
     gnb = model.fit(X_train, y_train)
     # Compute accuracy on the training set
     train_accuracy[i] = gnb.score(X_train, y_train)
+    #print(k)
     # Compute accuracy on the test set
     test_accuracy[i] = gnb.score(X_test, y_test)
 

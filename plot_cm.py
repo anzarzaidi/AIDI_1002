@@ -1,78 +1,64 @@
-# script to plot best confusion matrx
-from sklearn.metrics import plot_confusion_matrix
-from matplotlib import pyplot as plt
-import pandas as pd
-from sklearn.naive_bayes import GaussianNB
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.svm import SVC
-from sklearn.model_selection import train_test_split
+# script to train VBL-VA001
 
-# load data
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+import numpy as np
+import pandas as pd
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import f1_score
+
 # load data hasil ekstraksi fitur fft
-x = pd.read_csv("feature_VBL-VA001.csv", header=None)
+x = pd.read_csv("data/feature_VBL-VA001.csv", header=None)
 
 # load label
-y = pd.read_csv("label_VBL-VA001.csv", header=None)
+y = pd.read_csv("data/label_VBL-VA001.csv", header=None)
 
 # make 1D array to avoid warning
 y = pd.Series.ravel(y)
+
 
 X_train, X_test, y_train, y_test = train_test_split(
     x, y, test_size=0.2, random_state=42, shuffle=True
 )
 
-# KNN
-knn = KNeighborsClassifier(n_neighbors=2)
-out_knn = knn.fit(X_train, y_train)
-print("KNN Accuracy on Train Data: {}".format(knn.score(X_train, y_train)))
-print("KNN Accuracy on Test Data: {}".format(knn.score(X_test, y_test)))
 
+print("Shape of Train Data : {}".format(X_train.shape))
+print("Shape of Test Data : {}".format(X_test.shape))
+
+# kNN Machine Learning
+# import KNeighborsClassifier
+
+# Setup arrays to store training and test accuracies
 # SVM Machine Learning
-svm = SVC(C=86, kernel='rbf', class_weight='balanced', random_state=None)
-out_svm = svm.fit(X_train, y_train)
-print("SVM accuracy is {} on Train Dataset".format(svm.score(X_train, y_train)))
-print("SVM accuracy is {} on Test Dataset".format(svm.score(X_test, y_test)))
+# Setup arrays to store training and test accuracies
+var_gnb = [10.0 ** i for i in np.arange(-1, -100, -1)]
+train_accuracy = np.empty(len(var_gnb))
+test_accuracy = np.empty(len(var_gnb))
 
-# Naive Bayes
-model = GaussianNB(var_smoothing=1e-11)
-out_gnb = model.fit(X_train, y_train)
-gnb_pred = model.predict(X_test)
+for i, k in enumerate(var_gnb):
+    # Setup a Gaussian Naive Bayes Classifier
+    rfc = RandomForestClassifier(criterion = 'entropy', random_state = 42)
+    gnb = rfc.fit(X_train, y_train)
+    # Compute accuracy on the training set
+    train_accuracy[i] = gnb.score(X_train, y_train)
+    # Compute accuracy on the test set
+    test_accuracy[i] = gnb.score(X_test, y_test)
 
-print("NB accuracy is {} on Train Dataset".format(model.score(X_train,
-                                                              y_train)))
-print("NB accuracy is {} on Test Dataset".format(model.score(X_test, y_test)))
+# print max acccuracy
+print(f"Max test acc: {np.max(test_accuracy)}")
 
+# Generate plot
+# plt.title('Varying var_smoothing in GNB')
+plt.plot(var_gnb, test_accuracy, label='Testing Accuracy')
+plt.plot(var_gnb, train_accuracy, label='Training accuracy')
+plt.legend()
+plt.xlabel('var_smoothing')
+plt.ylabel('Accuracy')
+# np.savetxt('gnb_var.txt', test_accuracy)
+# plt.savefig('acc_GNB.pdf')
+# plt.show()
 
-# class for all
-class_names = ['Normal', 'Misalignment', 'Unbalance', 'Bearing']
+# print optimal var_gnb and max test accuracy
+print(f"Optimal var_gnb: {np.argmax(test_accuracy)}")
+print(f"Max test accuracy: {max(test_accuracy)}")
 
-# plt.figure()
-# plt.subplot(1, 3, 1)
-# plot_confusion_matrix(out_knn, X_test, y_test, display_labels=class_names,
-#                       xticks_rotation=45, cmap=plt.cm.Greens,
-#                       values_format='.2f',
-#                       normalize='true')
-# plt.subplot(1, 3, 2)
-# plot_confusion_matrix(out_svm, X_test, y_test, display_labels=class_names,
-#                       xticks_rotation=45, cmap=plt.cm.Greens,
-#                       values_format='.2f',
-#                       normalize='true')
-# plt.subplot(1, 3, 3)
-# plot_confusion_matrix(out_gnb, X_test, y_test, display_labels=class_names,
-#                       xticks_rotation=45, cmap=plt.cm.Greens,
-#                       values_format='.2f',
-#                       normalize='true')
-
-# plt.savefig('cm.svg')
-
-fig, axes = plt.subplots(nrows=1, ncols=3, figsize=(15, 10))
-for out, ax in zip([out_knn, out_svm, out_gnb], axes.flatten()):
-    plot_confusion_matrix(out, X_test, y_test, ax=ax,
-                          display_labels=class_names,
-                          xticks_rotation=45, cmap='YlGn',
-                          values_format='.2f', normalize='true',
-                          colorbar=False)
-plt.tight_layout()
-
-# plt.savefig('cm.svg')
-plt.show()

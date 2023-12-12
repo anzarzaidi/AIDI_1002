@@ -6,10 +6,10 @@ import numpy as np
 import pandas as pd
 
 # load data hasil ekstraksi fitur fft
-X = pd.read_csv('feature_VBL-VA001.csv', header=None)
+X = pd.read_csv('data/feature_VBL-VA001.csv', header=None)
 
 # load label
-y = pd.read_csv('label_VBL-VA001.csv', header=None)
+y = pd.read_csv('data/label_VBL-VA001.csv', header=None)
 
 # make 1D array to avoid warning
 y = pd.Series.ravel(y)
@@ -22,8 +22,8 @@ test_accuracy = np.empty(len(neighbors))
 for i, k in enumerate(neighbors):
     # Setup a knn classifier with k neighbors
     clf_knn = KNeighborsClassifier(n_neighbors=k)
-    scores = cross_val_score(clf_knn, X, y, cv=5)
-    print(scores)
+    scores = cross_val_score(clf_knn, X.values, y, cv=5)
+    #print(scores)
     # Compute average accuracy on the test set
     test_accuracy[i] = np.mean(scores)
 

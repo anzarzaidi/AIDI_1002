@@ -4,7 +4,7 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
 import matplotlib.pyplot as plt
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.model_selection import train_test_split
+import sklearn.model_selection
 import numpy as np
 import pandas as pd
 

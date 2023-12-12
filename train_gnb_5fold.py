@@ -6,10 +6,10 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.model_selection import cross_val_score
 
 # load data hasil ekstraksi fitur fft
-X = pd.read_csv("data/feature_VBL-VA001.csv", header=None)
+X = pd.read_csv("data/existing/feature_VBL-VA001.csv", header=None)
 
 # load label
-y = pd.read_csv("data/label_VBL-VA001.csv", header=None)
+y = pd.read_csv("data/existing/label_VBL-VA001.csv", header=None)
 
 # make 1D array to avoid warning
 y = pd.Series.ravel(y)

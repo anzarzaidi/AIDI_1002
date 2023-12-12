@@ -9,10 +9,10 @@ import numpy as np
 import pandas as pd
 
 # load data hasil ekstraksi fitur fft
-x = pd.read_csv("data/feature_VBL-VA001.csv", header=None)
+x = pd.read_csv("data/existing/feature_VBL-VA001.csv", header=None)
 
 # load label
-y = pd.read_csv("data/label_VBL-VA001.csv", header=None)
+y = pd.read_csv("data/existing/label_VBL-VA001.csv", header=None)
 
 # make 1D array to avoid warning
 y = pd.Series.ravel(y)

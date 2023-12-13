@@ -20,11 +20,11 @@ import train_svm_10fold
 
 print("Executing existing code")
 print("###############################################################")
-train_svm.execute()
+train_svm.execute(False)
 train_svm_5fold.execute()
-train_gnb.execute()
+train_gnb.execute(False)
 train_gnb_5fold.execute()
-train_knn.execute()
+train_knn.execute(False)
 train_knn_5fold.execute()
 print("###############################################################")
 

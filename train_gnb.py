@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 
 
-def execute():
+def execute(plot):
     x = pd.read_csv("data/existing/feature_VBL-VA001.csv", header=None)
     y = pd.read_csv("data/existing/label_VBL-VA001.csv", header=None)
     y = pd.Series.ravel(y)
@@ -27,13 +27,14 @@ def execute():
         test_accuracy[i] = gnb.score(X_test, y_test)
 
     print(f"Max test acc: {np.max(test_accuracy)}")
-    plt.plot(var_gnb, test_accuracy, label='Testing Accuracy')
-    plt.plot(var_gnb, train_accuracy, label='Training accuracy')
-    plt.legend()
-    plt.xlabel('var_smoothing')
-    plt.ylabel('Accuracy')
+    if plot:
+        plt.plot(var_gnb, test_accuracy, label='Testing Accuracy')
+        plt.plot(var_gnb, train_accuracy, label='Training accuracy')
+        plt.legend()
+        plt.xlabel('var_smoothing')
+        plt.ylabel('Accuracy')
     print(f"Optimal var_gnb: {np.argmax(test_accuracy)}")
     print(f"Max test accuracy: {max(test_accuracy)}")
 
 
-execute()
+execute(True)

@@ -12,8 +12,8 @@ from tensorflow.keras.layers import Dense
 
 
 def execute():
-    x = pd.read_csv("data/extracted/feature_VBL-VA001.csv", header=None)
-    y = pd.read_csv("data/extracted/label_VBL-VA001.csv", header=None)
+    x = pd.read_csv("data/existing/feature_VBL-VA001.csv", header=None)
+    y = pd.read_csv("data/existing/label_VBL-VA001.csv", header=None)
     y = pd.Series.ravel(y)
     X_train, X_test, Y_train, Y_test = train_test_split(
         x, y, test_size=0.2, random_state=42, shuffle=True

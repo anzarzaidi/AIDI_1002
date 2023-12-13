@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 
 
-def execute():
+def execute(plot):
     x = pd.read_csv("data/existing/feature_VBL-VA001.csv", header=None)
     y = pd.read_csv("data/existing/label_VBL-VA001.csv", header=None)
     y = pd.Series.ravel(y)
@@ -25,14 +25,17 @@ def execute():
         svm.fit(X_train, y_train)
         train_accuracy[i] = svm.score(X_train, y_train)
         test_accuracy[i] = svm.score(X_test, y_test)
-    plt.plot(c_svm, test_accuracy, label='Testing Accuracy')
-    plt.plot(c_svm, train_accuracy, label='Training accuracy')
-    plt.legend()
-    plt.xlabel('C')
-    plt.ylabel('Accuracy')
-    plt.show()
+
+    if plot:
+        plt.plot(c_svm, test_accuracy, label='Testing Accuracy')
+        plt.plot(c_svm, train_accuracy, label='Training accuracy')
+        plt.legend()
+        plt.xlabel('C')
+        plt.ylabel('Accuracy')
+        plt.show()
+
     print(f"Optimal C: {np.argmax(test_accuracy)}")
     print(f"Max test accuracy: {max(test_accuracy)}")
 
 
-execute()
+execute(True)

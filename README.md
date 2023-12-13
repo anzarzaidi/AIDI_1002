@@ -21,17 +21,19 @@ You can also try the extracted feature under `data` directory and run
 the following codes.
 
 
-# Running the program
+# Running the program (All classifiers)
 ```bash
-# First, extract the feature
-$ python3 extract_feature.py
-# Then you can run any train_* program, i.e.,:
-$ python3 train_svm.py
-Shape of Train Data : (3200, 27)
-Shape of Test Data : (800, 27)
-Optimal C: 69
-Max test accuracy: 1.0
+# Exracted features that were provided by original authors are present in 'data/existing' folder.
+# There is also a much larger feature set that is present in 'data/existing' folder. 
+# Below command will execute all classification models, models added by orignal authors along with new models added by current authors.
+$ python main.py
 ```
+# Running the program (A specific classifier)
+```bash
+# To execute an particular existing classifier
+$ python train_svm_10fold.py
+```
+
 
 # Note on BPFO/BPFI
 

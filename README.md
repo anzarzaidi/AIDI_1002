@@ -24,7 +24,7 @@ the following codes.
 # Running the program (All classifiers)
 ```bash
 # Exracted features that were provided by original authors are present in 'data/existing' folder.
-# There is also a much larger feature set that is present in 'data/existing' folder. 
+# There is also a much larger feature set that is present in 'data/extracted' folder. 
 # Below command will execute all classification models, models added by orignal authors along with new models added by current authors.
 $ python main.py
 ```

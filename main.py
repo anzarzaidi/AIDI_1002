@@ -12,6 +12,7 @@ import train_knn_5fold
 import train_lr
 import train_mnb
 import train_randomforest
+import random_forest_5fold_param_tuning
 import train_rf_single
 import train_svm
 import train_svm_5fold
@@ -38,5 +39,6 @@ train_dnn.execute()
 train_lr.execute()
 train_mnb.execute()
 train_randomforest.execute()
+random_forest_5fold_param_tuning.execute()
 train_rf_single.execute()
 train_svm_10fold.execute()

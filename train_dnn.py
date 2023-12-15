@@ -18,6 +18,8 @@ def execute():
     X_train, X_test, Y_train, Y_test = train_test_split(
         x, y, test_size=0.2, random_state=42, shuffle=True
     )
+    print('*************************************************************************')
+    print("Dense Neural Network Classifier")
     print("Shape of Train Data : {}".format(X_train.shape))
     print("Shape of Test Data : {}".format(X_test.shape))
     model1 = Sequential()
@@ -29,6 +31,7 @@ def execute():
     print(model1.summary)
     print(X_train.shape)
     model1.fit(X_train, Y_train, epochs=10, batch_size=256)
+    print('*************************************************************************')
 
 
 execute()

@@ -1,6 +1,4 @@
-# script to train VBL-VA001
 
-from sklearn.metrics import confusion_matrix
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 import numpy as np
@@ -16,6 +14,7 @@ import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
 from sklearn.metrics import accuracy_score, precision_score, recall_score
+from sklearn.metrics import confusion_matrix
 
 def execute():
     global confusion_matrix
@@ -25,6 +24,8 @@ def execute():
     X_train, X_test, y_train, y_test = train_test_split(
         x, y, test_size=0.2, random_state=42, shuffle=True
     )
+    print('*************************************************************************')
+    print("RandomForest Classifier")
     print("Shape of Train Data : {}".format(X_train.shape))
     print("Shape of Test Data : {}".format(X_test.shape))
     from sklearn.ensemble import RandomForestClassifier
@@ -52,6 +53,7 @@ def execute():
     print('Test set score: {:.4f}'.format(cv.score(X_test, y_test)))
 
     print(classification_report(y_test, rfc_predict))
+    print('*************************************************************************')
 
 
 

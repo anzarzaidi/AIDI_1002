@@ -16,6 +16,8 @@ def execute():
     X_train, X_test, y_train, y_test = train_test_split(
         x, y, test_size=0.2, random_state=42, shuffle=True
     )
+    print('*************************************************************************')
+    print("DecisionTree Classifier")
     print("Shape of Train Data : {}".format(X_train.shape))
     print("Shape of Test Data : {}".format(X_test.shape))
     dt = DecisionTreeClassifier(criterion='entropy', random_state=42)

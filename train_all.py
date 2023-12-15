@@ -7,6 +7,7 @@ from sklearn.neighbors import KNeighborsClassifier
 import sklearn.model_selection
 import numpy as np
 import pandas as pd
+from sklearn.model_selection import train_test_split
 
 # load data hasil ekstraksi fitur fft
 x = pd.read_csv("data/existing/feature_VBL-VA001.csv", header=None)

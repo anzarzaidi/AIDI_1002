@@ -16,12 +16,14 @@ def execute():
     for i, k in enumerate(var_gnb):
         clf_gnb = GaussianNB(var_smoothing=k)
         scores = cross_val_score(clf_gnb, X, y, cv=5)
-        print(scores)
+        #print(scores)
         test_accuracy[i] = np.mean(scores)
 
+    print('*************************************************************************')
+    print("GaussianNB 5 fold Classifier")
     print(f"Max test acc: {np.max(test_accuracy)}")
     max_var_gnb = np.argmax(test_accuracy)
     print(f"Best var smoothing: {var_gnb[max_var_gnb]}")
-
+    print('*************************************************************************')
 
 execute()

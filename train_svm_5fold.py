@@ -18,8 +18,12 @@ def execute():
         scores = cross_val_score(clf_svm, X, y, cv=5)
         print(scores)
         test_accuracy[i] = np.mean(scores)
+
+    print('*************************************************************************')
+    print("SVM 5 fold Classifier")
     print(f"Max test acc: {np.max(test_accuracy)}")
     print(f"Best C: {np.argmax(test_accuracy) + 1}")
+    print('*************************************************************************')
 
 
 execute()

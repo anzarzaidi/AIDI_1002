@@ -14,6 +14,8 @@ def execute(plot):
     X_train, X_test, y_train, y_test = train_test_split(
         x, y, test_size=0.2, random_state=42, shuffle=True
     )
+    print('*************************************************************************')
+    print("BernoulliNB Classifier")
     print("Shape of Train Data : {}".format(X_train.shape))
     print("Shape of Test Data : {}".format(X_test.shape))
     var_gnb = [10.0 ** i for i in np.arange(-1, -100, -1)]
@@ -36,6 +38,7 @@ def execute(plot):
 
     print(f"Optimal var_gnb: {np.argmax(test_accuracy)}")
     print(f"Max test accuracy: {max(test_accuracy)}")
+    print('*************************************************************************')
 
 
 execute(True)

@@ -16,8 +16,10 @@ def execute():
         clf_knn = KNeighborsClassifier(n_neighbors=k)
         scores = cross_val_score(clf_knn, X.values, y, cv=5)
         test_accuracy[i] = np.mean(scores)
+    print('*************************************************************************')
+    print("KNeighbors 5 fold Classifier")
     print(f"Max test acc: {np.max(test_accuracy)}")
     print(f"Best neighbors: {np.argmax(test_accuracy) + 1}")
-
+    print('*************************************************************************')
 
 execute()

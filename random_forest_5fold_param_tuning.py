@@ -24,6 +24,8 @@ def execute():
         'n_estimators': [5, 50, 250],
         'max_depth': [2, 4, 8, 16, 32, None]
     }
+    print('*************************************************************************')
+    print("RandomForest Classifier")
     x = pd.read_csv("data/existing/feature_VBL-VA001.csv", header=None)
     y = pd.read_csv("data/existing/label_VBL-VA001.csv", header=None)
     y = pd.Series.ravel(y)
@@ -42,5 +44,5 @@ def execute():
     print('Test set score: {:.4f}'.format(cv.score(X_test, y_test)))
     print(classification_report(y_test, rfc_predict))
 
-
+    print('*************************************************************************')
 execute()

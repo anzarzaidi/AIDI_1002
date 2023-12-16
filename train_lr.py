@@ -3,12 +3,10 @@ import numpy as np
 from sklearn import preprocessing
 from sklearn.linear_model import LogisticRegression
 from sklearn import metrics
-from sklearn.naive_bayes import ComplementNB
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import confusion_matrix
 from sklearn.datasets import make_classification
-from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix, f1_score
+
 
 def execute():
     global confusion_matrix
@@ -24,8 +22,15 @@ def execute():
     print('*************************************************************************')
     print("LogisticRegression Classifier")
     print('Accuracy of logistic regression classifier on test set: {:.2f}'.format(logreg.score(X_test, y_test)))
-    #confusion_matrix = confusion_matrix(y_test, y_pred)
-    #print(confusion_matrix)
+
+    conf_matrix = confusion_matrix(y_test, y_pred)
+    print("\nConfusion Matrix:\n", conf_matrix)
+    # Display classification report
+    class_report = classification_report(y_test, y_pred)
+    print("Classification Report:\n", class_report)
+    print('Testing Set Evaluation F1-Score=>', f1_score(y_test, y_pred, average='macro'))
+    print('*************************************************************************')
+
     print('*************************************************************************')
 
 

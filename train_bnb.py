@@ -5,6 +5,10 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 import numpy as np
 import pandas as pd
+from sklearn.multiclass import OneVsRestClassifier
+from sklearn.metrics import f1_score, accuracy_score, classification_report, confusion_matrix
+
+
 
 
 def execute(plot):
@@ -18,26 +22,20 @@ def execute(plot):
     print("BernoulliNB Classifier")
     print("Shape of Train Data : {}".format(X_train.shape))
     print("Shape of Test Data : {}".format(X_test.shape))
-    var_gnb = [10.0 ** i for i in np.arange(-1, -100, -1)]
-    train_accuracy = np.empty(len(var_gnb))
-    test_accuracy = np.empty(len(var_gnb))
-    for i, k in enumerate(var_gnb):
-        model = BernoulliNB()
-        bnb = model.fit(X_train, y_train)
-        train_accuracy[i] = bnb.score(X_train, y_train)
-        test_accuracy[i] = bnb.score(X_test, y_test)
-    print(f"Max test acc: {np.max(test_accuracy)}")
-
-    if plot:
-        plt.plot(var_gnb, test_accuracy, label='Testing Accuracy')
-        plt.plot(var_gnb, train_accuracy, label='Training accuracy')
-        plt.legend()
-        plt.xlabel('var_smoothing')
-        plt.ylabel('Accuracy')
-        plt.show()
-
-    print(f"Optimal var_gnb: {np.argmax(test_accuracy)}")
-    print(f"Max test accuracy: {max(test_accuracy)}")
+    model = BernoulliNB()
+    multiclass_classifier = OneVsRestClassifier(model)
+    # Train the model
+    multiclass_classifier.fit(X_train, y_train)
+    # Make predictions on the test set
+    y_pred = multiclass_classifier.predict(X_test)
+    # Evaluate the model
+    accuracy = accuracy_score(y_test, y_pred)
+    conf_matrix = confusion_matrix(y_test, y_pred)
+    class_report = classification_report(y_test, y_pred)
+    print("Accuracy:", accuracy)
+    print("\nConfusion Matrix:\n", conf_matrix)
+    print("\nClassification Report:\n", class_report)
+    print('Testing Set Evaluation F1-Score=>', f1_score(y_test, y_pred, average='macro'))
     print('*************************************************************************')
 
 

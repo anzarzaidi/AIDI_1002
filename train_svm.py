@@ -31,13 +31,14 @@ def execute(plot):
     if plot:
         plt.plot(c_svm, test_accuracy, label='Testing Accuracy')
         plt.plot(c_svm, train_accuracy, label='Training accuracy')
-        plt.legend()
+        plt.legend('SVM Classifier')
         plt.xlabel('C')
         plt.ylabel('Accuracy')
         plt.show()
 
     print(f"Optimal C: {np.argmax(test_accuracy)}")
     print(f"Max test accuracy: {max(test_accuracy)}")
+
     print('*************************************************************************')
 
 

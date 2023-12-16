@@ -16,7 +16,7 @@ def execute():
     for i, k in enumerate(c_svm):
         clf_svm = SVC(C=k)
         scores = cross_val_score(clf_svm, X, y, cv=10)
-        print(scores)
+        #print(scores)
         test_accuracy[i] = np.mean(scores)
 
     print('*************************************************************************')

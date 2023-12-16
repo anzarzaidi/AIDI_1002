@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 import numpy as np
 import pandas as pd
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix, f1_score
 
 
 def execute():
@@ -18,20 +19,18 @@ def execute():
     print("MultinomialNB Classifier")
     print("Shape of Train Data : {}".format(X_train.shape))
     print("Shape of Test Data : {}".format(X_test.shape))
-    var_gnb = [10.0 ** i for i in np.arange(-1, -100, -1)]
-    train_accuracy = np.empty(len(var_gnb))
-    test_accuracy = np.empty(len(var_gnb))
-    for i, k in enumerate(var_gnb):
-        model = MultinomialNB()
-        gnb = model.fit(X_train, y_train)
-        train_accuracy[i] = gnb.score(X_train, y_train)
-        test_accuracy[i] = gnb.score(X_test, y_test)
+    mnb = MultinomialNB()
+    mnb.fit(X_train, y_train)
+    y_pred = mnb.predict(X_test)
+    print('Accuracy of logistic regression classifier on test set: {:.2f}'.format(mnb.score(X_test, y_test)))
 
-    print(f"Max test acc: {np.max(test_accuracy)}")
-    print(f"Optimal var_gnb: {np.argmax(test_accuracy)}")
-    print(f"Max test accuracy: {max(test_accuracy)}")
+    conf_matrix = confusion_matrix(y_test, y_pred)
+    print("\nConfusion Matrix:\n", conf_matrix)
+    # Display classification report
+    class_report = classification_report(y_test, y_pred)
+    print("Classification Report:\n", class_report)
+    print('Testing Set Evaluation F1-Score=>', f1_score(y_test, y_pred, average='macro'))
     print('*************************************************************************')
-
 
 
 execute()

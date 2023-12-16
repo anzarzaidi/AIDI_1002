@@ -35,7 +35,7 @@ def execute(plot):
         plt.legend()
         plt.xlabel('var_smoothing')
         plt.ylabel('Accuracy')
-    print(f"Optimal var_gnb: {np.argmax(test_accuracy)}")
+    print(f"Optimal var_smoothing: {np.argmax(test_accuracy)}")
     print(f"Max test accuracy: {max(test_accuracy)}")
     print('*************************************************************************')
 

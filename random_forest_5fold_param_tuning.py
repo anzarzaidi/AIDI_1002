@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
-from sklearn.metrics import accuracy_score, precision_score, recall_score
+from sklearn.metrics import accuracy_score, precision_score, recall_score, confusion_matrix,f1_score
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
 
@@ -39,10 +39,14 @@ def execute():
     print_results(cv)
     rfc_predict = cv.predict(X_test)
     print("Random Forest Classifier:")
-    print('Model accuracy score: {0:0.4f}'.format(accuracy_score(y_test, rfc_predict)))
-    print('Training set score: {:.4f}'.format(cv.score(X_train, y_train)))
-    print('Test set score: {:.4f}'.format(cv.score(X_test, y_test)))
-    print(classification_report(y_test, rfc_predict))
-
+    print(f"Accuracy: {accuracy_score(y_test, rfc_predict):.4f}")
+    conf_matrix = confusion_matrix(y_test, rfc_predict)
+    print("\nConfusion Matrix:\n", conf_matrix)
+    # Display classification report
+    class_report = classification_report(y_test, rfc_predict)
+    print("Classification Report:\n", class_report)
+    print('Testing Set Evaluation F1-Score=>', f1_score(y_test, rfc_predict, average='macro'))
     print('*************************************************************************')
+
+
 execute()

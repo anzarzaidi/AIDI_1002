@@ -9,6 +9,7 @@ import numpy as np
 import pandas as pd
 from tensorflow.keras import Sequential
 from tensorflow.keras.layers import Dense
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix, f1_score
 
 
 def execute():
@@ -31,6 +32,17 @@ def execute():
     print(model1.summary)
     print(X_train.shape)
     model1.fit(X_train, Y_train, epochs=10, batch_size=256)
+    y_pred_proba = model1.predict(X_test)
+    y_pred = tf.argmax(y_pred_proba, axis=1)
+    # Calculate and print accuracy
+    accuracy = accuracy_score(Y_test, y_pred)
+    print(f"Accuracy: {accuracy:.4f}")
+    conf_matrix = confusion_matrix(Y_test, y_pred_proba)
+    print("\nConfusion Matrix:\n", conf_matrix)
+    # Display classification report
+    class_report = classification_report(Y_test, y_pred)
+    print("Classification Report:\n", class_report)
+    print('Testing Set Evaluation F1-Score=>', f1_score(Y_test, y_pred_proba, average='macro'))
     print('*************************************************************************')
 
 

@@ -2,8 +2,8 @@
 Baseline methods for the paper [Lab-scale Vibration Analysis Dataset and Baseline Methods for Machinery Fault Diagnosis with Machine Learning](https://arxiv.org/abs/2212.14732).
 
 # Dataset
-Download from here: [https://zenodo.org/record/7006575#.Y3W9lzPP2og](https://zenodo.org/record/7006575#.Y3W9lzPP2og).  
-Locate the dataset to path like '/data/VBL-VA001`.  
+Dataset is here: [https://zenodo.org/record/7006575#.Y3W9lzPP2og](https://zenodo.org/record/7006575#.Y3W9lzPP2og).  
+Locate the dataset under 'data/existing`.  
 Structure of dataset:  
 ```bash
 bagus@m049:VBL-VA001$ tree -L 2 . --filelimit 100
@@ -16,9 +16,6 @@ bagus@m049:VBL-VA001$ tree -L 2 . --filelimit 100
 4 directories, 4000 files
 ```
 
-
-You can also try the extracted feature under `data` directory and run 
-the following codes.
 
 
 # Running the program (All classifiers)
